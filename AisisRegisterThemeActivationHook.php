@@ -14,7 +14,7 @@
 	 function aisis_register_theme_activation_hook($theme_name, $function){
 		 $aisis_option_key = "theme_is_activate_".$theme_name;
 		 if(get_option($aisis_option_key)){
-			 call_user_fun($function);
+			 call_user_func($function);
 			 update_option($aisis_option_key, 1);
 		 }
 	 }
