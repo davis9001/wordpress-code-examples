@@ -2,6 +2,11 @@
 /**
  * Adds Foo_Widget widget.
  */
+
+// register Foo_Widget widget
+add_action( 'widgets_init', create_function( '', 'register_widget( "foo_widget" );' ) );
+
+
 class Foo_Widget extends WP_Widget {
 
 	/**
