@@ -11,4 +11,3 @@
 // Update the post into the database
   wp_update_post( $my_post );
 
- ?>

@@ -81,4 +81,3 @@ class Foo_Widget extends WP_Widget {
 } // class Foo_Widget
 
 
-?>

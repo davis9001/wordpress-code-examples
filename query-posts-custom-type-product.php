@@ -21,4 +21,3 @@ endwhile;
 
 
 wp_reset_query();
-?>

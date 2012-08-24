@@ -7,4 +7,3 @@ Author: WPOrgUser
 Version: 1.0
 */
 
-?>

@@ -31,5 +31,3 @@ WP_PLUGIN_URL  // full url, no trailing slash
 	content_url()	// Content directory URL					http://www.example.com/wp-content
 	plugins_url()	// Plugins directory URL					http://www.example.com/wp-content/plugins
 	wp_upload_dir()	// Upload directory URL (returned array)	http://www.example.com/wp-content/uploads
- 
- ?>

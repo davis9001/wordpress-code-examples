@@ -29,4 +29,3 @@ function custom_admin_page_bingo_contents() {
 	echo '<p>Bingo!</p>';
 }
 
-?>
