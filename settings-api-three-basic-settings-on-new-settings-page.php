@@ -13,74 +13,64 @@
 // Set up a bunch of our values to make it easier to use this example,
 //	or make changes to our settings later:
 // After updating these values you'll need to update function names below too.
-$prefix = "myprefix_";
-$settingsPageTitle = "Settings Page Title";
-$settingsPageSlug = "settings-page-slug";
-$settingsMenuTitle = "Settings API Sample";
-$settingsMenuCapability = "edit_plugins";
+define('prefix', 'myprefix_');
+define('settingsPageTitle', 'Settings Page Title');
+define('settingsPageSlug', 'settings-page-slug');
+define('settingsMenuTitle', 'Settings API Sample');
+define('settingsMenuCapability', 'edit_plugins');
 
-$settingsSectionOneTitle = "Settings Section One Title";
-$settingsSectionOneSlug = $prefix."settings_section";
+define('settingsSectionOneTitle', 'Settings Section One Title');
+define('settingsSectionOneSlug', prefix.'settings_section');
 
-$settingOneTitle = 'Setting One Title';
-$settingOneSlug = $prefix.'setting_one_slug';
-$settingTwoTitle = 'Setting Two Title';
-$settingTwoSlug = $prefix.'setting_two_slug';
-$settingThreeTitle = 'Setting Three Title';
-$settingThreeSlug = $prefix.'setting_three_slug';
+define('settingOneTitle', 'Setting One Title');
+define('settingOneSlug', prefix.'setting_one_slug');
+define('settingTwoTitle', 'Setting Two Title');
+define('settingTwoSlug', prefix.'setting_two_slug');
+define('settingThreeTitle', 'Setting Three Title');
+define('settingThreeSlug', prefix.'setting_three_slug');
 
-$settingsSectionOneCallbackFunction = $settingsSectionOneSlug.'_content';
+define('settingsSectionOneCallbackFunction', settingsSectionOneSlug.'_content');
 
-$settingOneCallbackFunction = $settingOneSlug.'_input';
-$settingOneValidationFunction = $settingOneSlug.'_validate';
-$settingTwoCallbackFunction = $settingTwoSlug.'_input';
-$settingTwoValidationFunction = $settingTwoSlug.'_validate';
-$settingThreeCallbackFunction = $settingThreeSlug.'_input';
-$settingThreeValidationFunction = $settingThreeSlug.'_validate';
+define('settingOneCallbackFunction', settingOneSlug.'_input');
+define('settingOneValidationFunction', settingOneSlug.'_validate');
+define('settingTwoCallbackFunction', settingTwoSlug.'_input');
+define('settingTwoValidationFunction', settingTwoSlug.'_validate');
+define('settingThreeCallbackFunction', settingThreeSlug.'_input');
+define('settingThreeValidationFunction', settingThreeSlug.'_validate');
 
-$settingsPage = __FILE__;
+define('settingsPageID', __FILE__);
 
-$initSettingsFunction = $prefix.'init_settings';
-$addSettingsPageFunction = $prefix.'add_settings_page';
-$settingsManagerFunction = $prefix.'settings_manager';
+define('initSettingsFunction', prefix.'init_settings');
+define('addSettingsPageFunction', prefix.'add_settings_page');
+define('settingsManagerFunction', prefix.'settings_manager');
 
 // Create a function for initializing our new settings:
-function myprefix_init_settings() {
-	global $prefix, $settingsSectionOneTitle, $settingsSectionOneSlug, 
-		$settingsSectionOneCallbackFunction, $settingOneTitle, 
-		$settingOneSlug, $settingOneCallbackFunction, 
-		$settingOneValidationFunction, $settingTwoTitle, $settingTwoSlug, 
-		$settingTwoCallbackFunction, $settingTwoValidationFunction, 
-		$settingThreeTitle, $settingThreeSlug, $settingThreeCallbackFunction, 
-		$settingThreeValidationFunction, 
-		$settingsPage, $settingsPageTitle, $settingsPageSlug, 
-		$settingsMenuTitle, $settingsMenuCapability;
-	
+function myprefix_init_settings() {	
 	
 	// Settings section:
 	// Multiple settings can go into this section after we set it up.
 	// We are going to add three settings into this one section.
-		add_settings_section($settingsSectionOneSlug, $settingsSectionOneTitle, 
-			$settingsSectionOneCallbackFunction, $settingsPage);
+		add_settings_section(settingsSectionOneSlug, settingsSectionOneTitle, 
+			settingsSectionOneCallbackFunction, settingsPageID);
 	
 	// Settings field:
 	// We add settings fields to our settings section:
-		add_settings_field($settingOneSlug, $settingOneTitle, $settingOneCallbackFunction, 
-			$settingsPage, $settingsSectionOneSlug, array( 'label_for' => $settingOneSlug ));
-		add_settings_field($settingTwoSlug, $settingTwoTitle, $settingTwoCallbackFunction, 
-			$settingsPage, $settingsSectionOneSlug, array( 'label_for' => $settingTwoSlug ));
-		add_settings_field($settingThreeSlug, $settingThreeTitle, $settingThreeCallbackFunction, 
-			$settingsPage, $settingsSectionOneSlug, array( 'label_for' => $settingThreeSlug ));
+		add_settings_field(settingOneSlug, settingOneTitle, settingOneCallbackFunction, 
+			settingsPageID, settingsSectionOneSlug, array( 'label_for' => settingOneSlug ));
+		add_settings_field(settingTwoSlug, settingTwoTitle, settingTwoCallbackFunction, 
+			settingsPageID, settingsSectionOneSlug, array( 'label_for' => settingTwoSlug ));
+		add_settings_field(settingThreeSlug, settingThreeTitle, settingThreeCallbackFunction, 
+			settingsPageID, settingsSectionOneSlug, array( 'label_for' => settingThreeSlug ));
 	
 	// Setting:
 	// Now we register our settings:
-		register_setting($settingsPage, $settingOneSlug, $settingOneValidationFunction);
-		register_setting($settingsPage, $settingTwoSlug, $settingTwoValidationFunction);
-		register_setting($settingsPage, $settingThreeSlug, $settingThreeValidationFunction);
+		register_setting(settingsPageID, settingOneSlug, settingOneValidationFunction);
+		register_setting(settingsPageID, settingTwoSlug, settingTwoValidationFunction);
+		register_setting(settingsPageID, settingThreeSlug, settingThreeValidationFunction);
 }
 // Now call this function in the admin_init action hook:
 // This makes sure our settigns are added to WordPress early enough in the loading process:
-add_action('admin_init', $initSettingsFunction);
+add_action('admin_init', initSettingsFunction);
 
 
 
@@ -95,50 +85,25 @@ function myprefix_settings_section_content() {
 // == Field functions:
 // Callback for setting one input:
 function myprefix_setting_one_slug_input() {
-	global $prefix, $settingsSectionOneTitle, $settingsSectionOneSlug, 
-		$settingsSectionOneCallbackFunction, $settingOneTitle, 
-		$settingOneSlug, $settingOneCallbackFunction, 
-		$settingOneValidationFunction, $settingTwoTitle, $settingTwoSlug, 
-		$settingTwoCallbackFunction, $settingTwoValidationFunction, 
-		$settingThreeTitle, $settingThreeSlug, $settingThreeCallbackFunction, 
-		$settingThreeValidationFunction, 
-		$settingsPage, $settingsPageTitle, $settingsPageSlug, 
-		$settingsMenuTitle, $settingsMenuCapability;
   
   // Input field (text)
-	echo '<input type="text" id="'.$settingOneSlug.'" name="'.$settingOneSlug .'" value="' . get_option($settingOneSlug) . '" />';
+	echo '<input type="text" id="'.settingOneSlug.'" name="'.settingOneSlug .'" value="' . get_option(settingOneSlug) . '" />';
 }
 function myprefix_setting_two_slug_input() {
-	global $prefix, $settingsSectionOneTitle, $settingsSectionOneSlug, 
-		$settingsSectionOneCallbackFunction, $settingOneTitle, 
-		$settingOneSlug, $settingOneCallbackFunction, 
-		$settingOneValidationFunction, $settingTwoTitle, $settingTwoSlug, 
-		$settingTwoCallbackFunction, $settingsTwoValidationFunction, 
-		$settingsPage, $settingsPageTitle, $settingsPageSlug, 
-		$settingsMenuTitle, $settingsMenuCapability;
   
   // Input field (checkbox)
-	echo '<input type="checkbox" id="'.$settingTwoSlug.'" name="'.$settingTwoSlug .'" ';
-	checked(true , get_option($settingTwoSlug));
+	echo '<input type="checkbox" id="'.settingTwoSlug.'" name="'.settingTwoSlug .'" ';
+	checked(true , get_option(settingTwoSlug));
 	echo ' value="1" />';
 }
 function myprefix_setting_three_slug_input() {
-	global $prefix, $settingsSectionOneTitle, $settingsSectionOneSlug, 
-		$settingsSectionOneCallbackFunction, $settingOneTitle, 
-		$settingOneSlug, $settingOneCallbackFunction, 
-		$settingOneValidationFunction, $settingTwoTitle, $settingTwoSlug, 
-		$settingTwoCallbackFunction, $settingTwoValidationFunction, 
-		$settingThreeTitle, $settingThreeSlug, $settingThreeCallbackFunction, 
-		$settingThreeValidationFunction, 
-		$settingsPage, $settingsPageTitle, $settingsPageSlug, 
-		$settingsMenuTitle, $settingsMenuCapability;
   
   // Input field (select/option)
   $possibleValues = array('Option 1', 'Option 2', 'Option 3');
-  echo '<select id="' . $settingThreeSlug . '" name="' . $settingThreeSlug .'">';
+  echo '<select id="' . settingThreeSlug . '" name="' . settingThreeSlug .'">';
   foreach ($possibleValues as $value) {
   	echo '<option value="' . $value . '" ';
-  	selected($value, get_option($settingThreeSlug));
+  	selected($value, get_option(settingThreeSlug));
   	echo '>' . $value . '</option>';
   }
   echo '</select>';
@@ -162,31 +127,22 @@ function myprefix_setting_three_slug_validate($input) {
 
 // Displaying the setting page
 function myprefix_settings_manager() {
-	global $prefix, $settingsSectionOneTitle, $settingsSectionOneSlug, 
-		$settingsSectionOneCallbackFunction, $settingOneTitle, 
-		$settingOneSlug, $settingOneCallbackFunction, 
-		$settingOneValidationFunction, $settingTwoTitle, $settingTwoSlug, 
-		$settingTwoCallbackFunction, $settingTwoValidationFunction, 
-		$settingThreeTitle, $settingThreeSlug, $settingThreeCallbackFunction, 
-		$settingThreeValidationFunction, 
-		$settingsPage, $settingsPageTitle, $settingsPageSlug, 
-		$settingsMenuTitle, $settingsMenuCapability;
 	
 	echo "<h1>";
-	_e($settingsPageTitle);
+	_e(settingsPageTitle);
 	echo "</h1>";
 	
 	// Setting up the action URI for our form, we need to send our 
 	//	settings to the options.php page then redirect back to our 
 	//	settings page.
 	$optionsPageURI = "/wp-admin/options.php";
-	$settingsPageURI = "/wp-admin/options-general.php?page=$settingsPageSlug";
+	$settingsPageURI = "/wp-admin/options-general.php?page=settingsPageSlug";
 	$actionURI  = $optionsPageURI . '?redirect_to=' . $settingsPageURI;
 	
 	?>
 		<form action="<?php echo $actionURI; ?>" method="post">
-			<?php settings_fields($settingsPage); ?>
-			<?php do_settings_sections($settingsPage); ?>
+			<?php settings_fields(settingsPageID); ?>
+			<?php do_settings_sections(settingsPageID); ?>
 			<div class="submit">
 				<input name="Submit" class="primary-button" type="submit" value="<?php esc_attr_e('Save Changes');?>" />
 			</div>
@@ -196,30 +152,17 @@ function myprefix_settings_manager() {
 }
 
 function myprefix_add_settings_page() {
-	global $prefix, $settingsSectionOneTitle, $settingsSectionOneSlug, 
-		$settingsSectionOneCallbackFunction, $settingOneTitle, 
-		$settingOneSlug, $settingOneCallbackFunction, 
-		$settingOneValidationFunction, $settingTwoTitle, $settingTwoSlug, 
-		$settingTwoCallbackFunction, $settingTwoValidationFunction, 
-		$settingThreeTitle, $settingThreeSlug, $settingThreeCallbackFunction, 
-		$settingThreeValidationFunction, 
-		$settingsPage, $settingsPageTitle, $settingsPageSlug, 
-		$settingsMenuTitle, $settingsMenuCapability;
-	global $settingsManagerFunction;
 	
-	add_options_page($settingsPageTitle, $settingsMenuTitle,
-		$settingsMenuCapability, $settingsPageSlug,
-		$settingsManagerFunction);
+	add_options_page(settingsPageTitle, settingsMenuTitle,
+		settingsMenuCapability, settingsPageSlug,
+		settingsManagerFunction);
 	
 	// If you wanted to add an additional link to this settings page,
 	//	 in the menu for a custom post type you could use something like this:
 	/*
 	add_submenu_page('edit.php?post_type=post-type', 
-		"Settings", 
-		"Settings", 
-		'manage_options', 
-		"post-type-settings", 
-		$callbackFunction);
+		"Settings", "Settings", 
+		settingsMenuCapability, settingsPageSlug, settingsManagerFunction);
 	*/
 }
-add_action('admin_menu', $addSettingsPageFunction);
+add_action('admin_menu', addSettingsPageFunction);
